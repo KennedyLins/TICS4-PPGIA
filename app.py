@@ -35,7 +35,7 @@ if st.checkbox('Show raw data'):
     st.write(data)
 
 st.subheader('Volume de chuva por mês (mm)')
-hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=12, range=(1,12))[0]
+hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=12, range=(1,12))[1]
 st.bar_chart(hist_values)
 
 
