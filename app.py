@@ -7,12 +7,12 @@ st.set_page_config(
     page_title = "Dados Meteorológicos da Cidade do Recife",
     layout = "wide",
     menu_items = {
-        'About': "TESTE DO ABOUT"
+        'About': "Em construção"
     }
 )
 
 
-st.title('Dados Meteorológicos da Cidade do Recife')
+st.title('Dados Meteorológicos da Região Metropolitana do Recife')
 
 DATE_COLUMN = 'date/time'
 DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
@@ -28,13 +28,13 @@ def load_data(nrows):
 
 data_load_state = st.text('Loading data...')
 data = load_data(10000)
-data_load_state.text("Done! (using st.cache)")
+data_load_state.text("By Kennedy Lins")
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
     st.write(data)
 
-st.subheader('Number of pickups by hour')
+st.subheader('Volume de chuva por mês (mm)')
 hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
 st.bar_chart(hist_values)
 
@@ -42,5 +42,5 @@ st.bar_chart(hist_values)
 hour_to_filter = st.slider('hour', 0, 23, 17)
 filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
 
-st.subheader('Map of all pickups at %s:00' % hour_to_filter)
+st.subheader('Mapa das estações de monitoramento')
 st.map(filtered_data)
